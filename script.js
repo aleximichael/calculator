@@ -1,41 +1,49 @@
-function add(num1, num2) {
-    return (Number(num1) + Number(num2)) * 100000 / 100000;
-}
+const calcBtns = document.querySelector('#calc-buttons');
 
-function subtract(num1, num2) {
-    return num1 - num2;
-}
-
-function multiply (num1, num2) {
-    return num1 * num2;
-}
-
-function divide (num1, num2) {
-    if (Number(num2) === 0) {
-        return "ERROR";
-    } else {
-        return Math.floor(num1 / num2 * 100000) / 100000;
+calcBtns.addEventListener('click', (event) => {
+    let target = event.target;
+    switch(target.id) {
+        case "num":
+            runNumber(target.textContent);
+            break;
+        case "operator":
+            runOperator(target.textContent);
+            break;
+        case "equals":
+            runEquals();
+            break; 
+        case "clear":
+            runClear();
+            break;
+        case "delete":
+            runDelete();
+            break;
     };
-}
+});
+
 
 function operate() {
     let result = "";
     switch (operator) {
         case "+":
-            result = add(num1, num2);
+            result = (Number(num1) + Number(num2)) * 100000 / 100000;
             break;
         case "-":
-            result = subtract(num1, num2);
+            result = num1 - num2;
             break;
         case "/":
-            result = divide(num1, num2);
+            if (Number(num2) === 0) {
+                result = "ERROR";
+            } else {
+                result = Math.floor(num1 / num2 * 100000) / 100000;
+            };
             break;
         case "*":
-            result = multiply(num1, num2);
+            result = num1 * num2;
             break;
     };
 
-    num1 = result;
+    num1 = result.toString();
     num2 = "";
     operator = "";
     numToggle = 0;
@@ -47,66 +55,57 @@ let num2 = "";
 let operator = "";
 let numToggle = 1; // switch between 1 (Add to Num1), 2 (Add to Num2), and 0 (Reset Num1) 
 
-const numBtns = document.querySelectorAll(".num");
-const opBtns = document.querySelectorAll(".operator");
-const equalBtn = document.querySelector(".equals");
-const clearBtn = document.querySelector(".clear");
-const delBtn = document.querySelector(".delete");
+const displayContainer = document.querySelector("#display-container");
+const displayText = document.querySelector("#display-text");
 
-const displayContainer = document.querySelector(".display-container");
-const displayText = document.querySelector(".display-text");
+function runNumber(button) {
 
-numBtns.forEach((button) => {
-    button.addEventListener("click", () => {
+    if (numToggle === 0) {
+        num1 = "";
+        numToggle = 1;
+    }
 
-        if (numToggle === 0) {
-            num1 = "";
-            numToggle = 1;
-        }
-
-        if (numToggle === 1) {
-            if (!(button.textContent === "." && num1.includes('.'))) {
-                num1 += button.textContent;
-                displayText.textContent = num1;
-            };
-        } else if (numToggle === 2) {
-            if (!(button.textContent === "." && num2.includes('.'))) {
-                num2 += button.textContent;
-                displayText.textContent = num2;
-            };
+    if (numToggle === 1) {
+        if (!(button === "." && num1.includes('.'))) {
+            num1 += button;
+            displayText.textContent = num1;
         };
-
-    });
-});
-
-opBtns.forEach((button) => {
-    button.addEventListener("click", () => {
-        operator = button.textContent;
-        displayText.textContent = operator;
-        if (numToggle === 1 || numToggle === 0) {
-            numToggle = 2; // switch to num2
-        } else {
-            operate();
+    } else if (numToggle === 2) {
+        if (!(button === "." && num2.includes('.'))) {
+            num2 += button;
+            displayText.textContent = num2;
         };
-    });
-});
+    };
+}
 
-equalBtn.addEventListener("click", () => {
-    if (numToggle === 2) {
+function runOperator (button) {
+    operator = button;
+    displayText.textContent = operator;
+    if (numToggle === 1 || numToggle === 0) {
+        numToggle = 2; // switch to num2
+    } else {
         operate();
     };
-});
+}
 
-clearBtn.addEventListener("click", () => {
+function runEquals() {
+    if (numToggle === 2) {
+        operate();
+    };  
+}
+
+function runClear() {
     num1 = "";
     num2 = "";
     operator = "";
     numToggle = 1;
     displayText.textContent = 0;
-});
+}
 
-delBtn.addEventListener("click", () => {
-    
+function runDelete() {
+    console.log(num1);
+    console.log(num2);
+
     if (num2 !== "") {
         num2 = num2.slice(0,-1);
     } else if (operator !== "") {
@@ -124,4 +123,4 @@ delBtn.addEventListener("click", () => {
     } else {
         displayText.textContent = 0;
     };
-});
+}
