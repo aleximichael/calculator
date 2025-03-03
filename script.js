@@ -1,5 +1,5 @@
 function add(num1, num2) {
-    return Number(num1) + Number(num2);
+    return (Number(num1) + Number(num2)) * 100000 / 100000;
 }
 
 function subtract(num1, num2) {
@@ -38,14 +38,14 @@ function operate() {
     num1 = result;
     num2 = "";
     operator = "";
-    numToggle = false;
+    numToggle = 0;
     displayText.textContent = result;
 }
 
 let num1 = "";
 let num2 = "";
 let operator = "";
-let numToggle = false; // switches between num1 (false) and num2 (true)
+let numToggle = 1; // switch between 1 (Add to Num1), 2 (Add to Num2), and 0 (Reset Num1) 
 
 const numBtns = document.querySelectorAll(".num");
 const opBtns = document.querySelectorAll(".operator");
@@ -57,13 +57,28 @@ const displayText = document.querySelector(".display-text");
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
-        if (!numToggle) {
-            num1 += button.textContent;
-            displayText.textContent = num1;
-        } else {
-            num2 += button.textContent;
-            displayText.textContent = num2;
-        };
+
+        if (numToggle === 0) {
+            num1 = "";
+            numToggle = 1;
+        }
+
+        if (numToggle === 1) {
+            if (!(button.textContent === "." && num1.includes('.'))) {
+                num1 += button.textContent;
+                displayText.textContent = num1;
+            }
+        } else if (numToggle === 2) {
+            if (!(button.textContent === "." && num2.includes('.'))) {
+                num2 += button.textContent;
+                displayText.textContent = num2;
+            }
+        } 
+
+        console.log(num1);
+        console.log(num2);
+        console.log(operator);
+
     });
 });
 
@@ -71,8 +86,8 @@ opBtns.forEach((button) => {
     button.addEventListener("click", () => {
         operator = button.textContent;
         displayText.textContent = operator;
-        if (!numToggle) {
-            numToggle = !numToggle // switch to num2
+        if (numToggle === 1 || numToggle === 0) {
+            numToggle = 2; // switch to num2
         } else {
             operate();
         };
@@ -80,14 +95,15 @@ opBtns.forEach((button) => {
 });
 
 equalBtn.addEventListener("click", () => {
-    operate();
+    if (numToggle === 2) {
+        operate();
+    };
 });
 
 clearBtn.addEventListener("click", () => {
     num1 = "";
     num2 = "";
     operator = "";
-    numToggle = false;
+    numToggle = 1;
     displayText.textContent = 0;
 });
-
