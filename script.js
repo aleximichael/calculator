@@ -51,6 +51,7 @@ const numBtns = document.querySelectorAll(".num");
 const opBtns = document.querySelectorAll(".operator");
 const equalBtn = document.querySelector(".equals");
 const clearBtn = document.querySelector(".clear");
+const delBtn = document.querySelector(".delete");
 
 const displayContainer = document.querySelector(".display-container");
 const displayText = document.querySelector(".display-text");
@@ -67,17 +68,13 @@ numBtns.forEach((button) => {
             if (!(button.textContent === "." && num1.includes('.'))) {
                 num1 += button.textContent;
                 displayText.textContent = num1;
-            }
+            };
         } else if (numToggle === 2) {
             if (!(button.textContent === "." && num2.includes('.'))) {
                 num2 += button.textContent;
                 displayText.textContent = num2;
-            }
-        } 
-
-        console.log(num1);
-        console.log(num2);
-        console.log(operator);
+            };
+        };
 
     });
 });
@@ -106,4 +103,25 @@ clearBtn.addEventListener("click", () => {
     operator = "";
     numToggle = 1;
     displayText.textContent = 0;
+});
+
+delBtn.addEventListener("click", () => {
+    
+    if (num2 !== "") {
+        num2 = num2.slice(0,-1);
+    } else if (operator !== "") {
+        operator = "";
+    } else if (num1 !== "") {
+        num1 = num1.slice(0,-1);
+    };
+
+    if (num2 !== "") {
+        displayText.textContent = num2;
+    } else if (operator !== "") {
+        displayText.textContent = operator;
+    } else if (num1 !== "") {
+        displayText.textContent = num1;
+    } else {
+        displayText.textContent = 0;
+    };
 });
