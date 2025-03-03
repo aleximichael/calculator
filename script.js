@@ -21,6 +21,26 @@ calcBtns.addEventListener('click', (event) => {
     };
 });
 
+document.addEventListener('keydown', (event) => {
+    console.log(event.code);
+    const numKeys = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0'];
+
+    if (event.shiftKey && event.code === 'Digit8') {
+        runOperator('*');
+    } else if(numKeys.includes(event.code)) {
+        runNumber(event.code.slice(-1));
+    } else if (event.shiftKey && event.code === 'Equal') {
+        runOperator('+');
+    } else if (event.code === 'Equal' || event.code === 'Enter') {
+        runEquals();
+    } else if (event.code === 'Slash') {
+        runOperator('/');
+    } else if (event.code === 'Minus') {
+        runOperator('-');
+    } else if (event.code === 'Backspace') {
+        runDelete();
+    };
+});
 
 function operate() {
     let result = "";
