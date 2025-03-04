@@ -1,4 +1,4 @@
-const calcBtns = document.querySelector('#calc-buttons');
+const calcBtns = document.querySelector('#button-container');
 
 calcBtns.addEventListener('click', (event) => {
     let target = event.target;
@@ -18,15 +18,17 @@ calcBtns.addEventListener('click', (event) => {
         case "delete":
             runDelete();
             break;
+        case "neg":
+            runInverse();
+            break;s
     };
 });
 
 document.addEventListener('keydown', (event) => {
-    console.log(event.code);
     const numKeys = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0'];
 
     if (event.shiftKey && event.code === 'Digit8') {
-        runOperator('*');
+        runOperator('×');
     } else if(numKeys.includes(event.code)) {
         runNumber(event.code.slice(-1));
     } else if (event.shiftKey && event.code === 'Equal') {
@@ -34,7 +36,7 @@ document.addEventListener('keydown', (event) => {
     } else if (event.code === 'Equal' || event.code === 'Enter') {
         runEquals();
     } else if (event.code === 'Slash') {
-        runOperator('/');
+        runOperator('÷');
     } else if (event.code === 'Minus') {
         runOperator('-');
     } else if (event.code === 'Backspace') {
@@ -43,22 +45,25 @@ document.addEventListener('keydown', (event) => {
 });
 
 function operate() {
+    console.log(num1);
+    console.log(num2);
+    console.log(operator);
     let result = "";
     switch (operator) {
         case "+":
-            result = (Number(num1) + Number(num2)) * 100000 / 100000;
+            result = (Number(num1) + Number(num2)) * 10000000 / 10000000;
             break;
         case "-":
             result = num1 - num2;
             break;
-        case "/":
+        case "÷":
             if (Number(num2) === 0) {
                 result = "ERROR";
             } else {
-                result = Math.floor(num1 / num2 * 100000) / 100000;
+                result = Math.floor(num1 / num2 * 10000000) / 10000000;
             };
             break;
-        case "*":
+        case "×":
             result = num1 * num2;
             break;
     };
@@ -142,5 +147,15 @@ function runDelete() {
         displayText.textContent = num1;
     } else {
         displayText.textContent = 0;
+    };
+}
+
+function runInverse() {
+    if (numToggle === 1 || numToggle === 0) {
+        num1 = (num1*-1).toString();
+        displayText.textContent = num1;
+    } else if (numToggle === 2) {
+        num2 = (num2*-1).toString();
+        displayText.textContent = num2;
     };
 }
