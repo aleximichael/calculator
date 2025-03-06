@@ -3,6 +3,7 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 let numToggle = 1; // switch between 1 (Add to Num1), 2 (Add to Num2),and 0 (Reset Num1) 
+const DEC_PRECISION = 1e10;
 
 // Display Text
 const displayContainer = document.querySelector("#display-container");
@@ -67,35 +68,29 @@ function operate() {
     
     let result = "";
 
-    num1 = Math.floor(Number(num1) * 1000); 
-    num2 = Math.floor(Number(num2) * 1000);
-
-    console.log(num1);
-    console.log(num2);
-
     switch (operator) {
         case "+":
-            result = (num1 + num2) / 1000;
+            result = Math.round((Number(num1) + Number(num2)) * DEC_PRECISION) / DEC_PRECISION;
             break;
         case "-":
-            result = (num1 - num2) / 1000;
+            result = Math.round((num1 - num2) * DEC_PRECISION) / DEC_PRECISION;
             break;
         case "÷":
-            if (num2 === 0) {
+            if (Number(num2) === 0) {
                 result = "ERROR";
             } else {
-                result = num1  / num2;
+                result = Math.round((num1 / num2) * DEC_PRECISION) / DEC_PRECISION;
             };
             break;
         case "×":
-            result = num1 * num2;
+            result = Math.round((num1 * num2) * DEC_PRECISION) / (DEC_PRECISION);
             break;
     };
-        
-    result = result.toString();
     
-    displayHistoryText.textContent = num1/1000 + " " + operator + " " + num2/1000;
+    displayHistoryText.textContent = num1 + " " + operator + " " + num2;
     displayContainer.insertBefore(displayHistoryText, displayText);
+
+    result = result.toString();
 
     num1 = result;
     num2 = "";
@@ -136,7 +131,7 @@ function runOperator (button) {
 }
 
 function runEquals() {
-    if (numToggle === 2 || numToggle === 0) {
+    if (numToggle === 2) {
         operate(); // only operate if there are two numbers
     };  
 }
@@ -155,6 +150,7 @@ function runDelete() {
         num2 = num2.slice(0,-1);
     } else if (operator !== "") {
         operator = "";
+        numToggle = 1; 
     } else if (num1 !== "") {
         num1 = num1.slice(0,-1);
     };
