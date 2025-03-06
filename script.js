@@ -40,24 +40,28 @@ calcBtns.addEventListener('click', (event) => {
 });
 
 document.addEventListener('keydown', (event) => {
-    const numKeys = ['Digit1', 'Digit2', 'Digit3', 'Digit4',
-        'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0'];
 
-    if (event.shiftKey && event.code === 'Digit8') {
+    console.log(event.code)
+    const numKeys = ['Digit1', 'Digit2', 'Digit3', 'Digit4',
+        'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Numpad1',
+        'Numpad2', 'Numpad3', 'Numpad4', 'Numpad5', 'Numpad6', 'Numpad7', 'Numpad8',
+        'Numpad9', 'Numpad0'];
+
+    if ((event.shiftKey && event.code === 'Digit8') || event.code === 'NumpadMultiply') {
         runOperator('×'); // Multiplication symbol
     } else if(numKeys.includes(event.code)) {
         runNumber(event.code.slice(-1));
-    } else if (event.shiftKey && event.code === 'Equal') {
+    } else if ((event.shiftKey && event.code === 'Equal') || event.code === 'NumpadAdd') {
         runOperator('+');
-    } else if (event.code === 'Equal' || event.code === 'Enter') {
+    } else if (event.code === 'Equal' || event.code === 'Enter' || event.code === "NumpadEqual" || event.code === 'NumpadEnter') {
         runEquals();
-    } else if (event.code === 'Slash') {
+    } else if (event.code === 'Slash' || event.code === 'NumpadDivide') {
         runOperator('÷'); // Division symbol
-    } else if (event.code === 'Minus') {
+    } else if (event.code === 'Minus' || event.code === 'NumpadSubtract') {
         runOperator('-');
     } else if (event.code === 'Backspace') {
         runDelete();
-    } else if (event.code === 'Period') {
+    } else if (event.code === 'Period' || event.code === 'NumpadDecimal') {
         runNumber('.');
     };
 });
