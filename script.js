@@ -65,19 +65,18 @@ function operate() {
     
     let result = "";
 
-    // Max total of 10 characters -> Max of 8 decimal places
-    num1 = Math.floor(Number(num1) * 100000000); 
-    num2 = Math.floor(Number(num2) * 100000000);
+    num1 = Math.floor(Number(num1) * 1000); 
+    num2 = Math.floor(Number(num2) * 1000);
 
     console.log(num1);
     console.log(num2);
 
     switch (operator) {
         case "+":
-            result = (num1 + num2) / 100000000;
+            result = (num1 + num2) / 1000;
             break;
         case "-":
-            result = (num1 - num2) / 100000000;
+            result = (num1 - num2) / 1000;
             break;
         case "÷":
             if (num2 === 0) {
@@ -87,10 +86,10 @@ function operate() {
             };
             break;
         case "×":
-            result = num1 * num2 / (100000000 * 100000000);
+            result = num1 * num2 / (1000 * 1000);
             break;
     };
-    
+        
     result = result.toString();
     
     num1 = result;
@@ -132,7 +131,7 @@ function runOperator (button) {
 }
 
 function runEquals() {
-    if (numToggle === 2) {
+    if (numToggle === 2 || numToggle === 0) {
         operate(); // only operate if there are two numbers
     };  
 }

@@ -24,55 +24,82 @@ body {
 #cal-container {
     background-color: #F3B3CE;
     width: 480px;
-    height: 550px;
     border-radius: 16px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 32px;
-    display: flex;
-    flex-direction: column;
 }
 
 #calc-title {
     color: #614852;
     text-align: right;
     margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 #display-container {
-    background-color: #9CA0AC;
+    background-color: #adb1bd;
     color: #2B2F3D;
     border: 2px solid white;
     padding: 16px 24px;
-    font-size: 40px;
     text-align: right;
     border-radius: 12px;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
     font-family: 'Orbitron', sans-serif;
-    overflow: auto;
+    margin-bottom: 24px;
+}
+
+#display-history {
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+#display-text {
+    font-size: 36px;
+    word-wrap: break-word;
 }
 
 #button-container {
-    padding: 32px 16px 16px;
-    flex: auto;
-    display: flex;
-    justify-content: space-between;
-}
-
-.col {
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
+    align-items: center;
+}
+
+.grid {
+    display: flex;
+    gap: 16px;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    gap: 16px;
 }
 
 button {
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     border-radius: 100%;
     border: none;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
     font-family: 'Bitter', sans-serif;
     font-size: 28px;
+}
+
+button:hover {
+    filter: brightness(80%);
 }
 
 button#num {
@@ -93,5 +120,5 @@ button#neg {
 
 button#equals {
     border-radius: 12px;
-    flex: auto;
+    flex: 1;
 }

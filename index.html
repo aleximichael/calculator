@@ -4,44 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Calculator</title>
+    <title>Basic Calculator</title>
 </head>
 <body>
 
     <div id="cal-container">
         <div id="calc-title">CALCULATOR</div>
         <div id="display-container">
+            <div id="display-history">0</div>
             <div id="display-text">0</div>
         </div>
         <div id="button-container">
-            <div class="col">
+            <div class="row">
                 <button id="num">7</button>
-                <button id="num">4</button>
-                <button id="num">1</button>
-                <button id="num">0</button>
-            </div>
-            <div class="col">
                 <button id="num">8</button>
-                <button id="num">5</button>
-                <button id="num">2</button>
-                <button id="num">.</button>
-            </div>
-            <div class="col">
                 <button id="num">9</button>
-                <button id="num">6</button>
-                <button id="num">3</button>
-                <button id="neg">&plusmn</button>
-            </div>
-            <div class="col">
                 <button id="operator">&divide</button>
-                <button id="operator">&times</button>
-                <button id="operator">-</button>
-                <button id="operator">+</button>
-            </div>
-            <div class="col">
                 <button id="clear">AC</button>
+            </div>
+            <div class="row">
+                <button id="num">4</button>
+                <button id="num">5</button>
+                <button id="num">6</button>
+                <button id="operator">&times</button>
                 <button id="delete">DEL</button>
-                <button id="equals">=</button>
+            </div>
+            <div class="grid">
+                <div class="left-col">
+                    <div class="row">
+                        <button id="num">1</button>
+                        <button id="num">2</button>
+                        <button id="num">3</button>
+                        <button id="operator">-</button>
+                    </div>
+                    <div class="row">
+                        <button id="num">0</button>
+                        <button id="num">.</button>
+                        <button id="neg">&plusmn</button>
+                        <button id="operator">+</button>
+                    </div>
+                </div>
+                <div class="right-col">
+                    <button id="equals">=</button>
+                </div>
             </div>
         </div>
     </div>
