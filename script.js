@@ -7,6 +7,8 @@ let numToggle = 1; // switch between 1 (Add to Num1), 2 (Add to Num2),and 0 (Res
 // Display Text
 const displayContainer = document.querySelector("#display-container");
 const displayText = document.querySelector("#display-text");
+const displayHistoryText = document.createElement("div");
+displayHistoryText.setAttribute("style", "font-size: 16px; word-wrap: break-word");
 
 // Keyboard + Button Input
 const calcBtns = document.querySelector('#button-container');
@@ -86,12 +88,15 @@ function operate() {
             };
             break;
         case "×":
-            result = num1 * num2 / (1000 * 1000);
+            result = num1 * num2;
             break;
     };
         
     result = result.toString();
     
+    displayHistoryText.textContent = num1/1000 + " " + operator + " " + num2/1000;
+    displayContainer.insertBefore(displayHistoryText, displayText);
+
     num1 = result;
     num2 = "";
     operator = "";
@@ -142,6 +147,7 @@ function runClear() {
     operator = "";
     numToggle = 1;
     displayText.textContent = 0;
+    displayHistoryText.remove();
 }
 
 function runDelete() {

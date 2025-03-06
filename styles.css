@@ -49,11 +49,6 @@ body {
     margin-bottom: 24px;
 }
 
-#display-history {
-    font-size: 16px;
-    word-wrap: break-word;
-}
-
 #display-text {
     font-size: 36px;
     word-wrap: break-word;
